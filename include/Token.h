@@ -2,6 +2,8 @@
 #define TOKEN_H
 
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 
 typedef enum TokenType {

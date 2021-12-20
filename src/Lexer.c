@@ -44,6 +44,7 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 			add_element(toklist, create_token("\"", T_QUOTE));
 			for (int i = lexer -> colNum + 1; i < strlen(line); ++i) {
 				if (line[i] == '"') {
+					add_element(toklist, create_token(part, T_STR));
 					sq_reached = true;
 					break;
 				}
@@ -56,7 +57,6 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 		}
 	
 		lexer -> colNum += strlen(part) + 1;
-
 		part = strtok(NULL, " ");
 	}
 }

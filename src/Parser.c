@@ -13,6 +13,7 @@ struct AST_NODE** parse(struct Parser* parser, int* s) {
 					struct AST_NODE* node = (struct AST_NODE*)malloc(sizeof(struct AST_NODE));
 					init_node(node, "type", "print-expression", 0, false);
 					ast_insert(head_node, node, s);
+					printf("%s\n", parse_peek(*parser, 0).tok);
 				} else {
 					ignore = false;
 				}
@@ -23,6 +24,6 @@ struct AST_NODE** parse(struct Parser* parser, int* s) {
 }
 
 
-struct Token parse_peek(struct Parser p, unsigned int offset, toklist_t toklist) {
-	return toklist.tokens[p.index + offset];
+struct Token parse_peek(struct Parser p, unsigned int offset) {
+	return p.tokenList.tokens[p.index + offset];
 }

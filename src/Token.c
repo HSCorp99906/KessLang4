@@ -23,9 +23,13 @@ void add_element(toklist_t* tl, tok_t element) {
 
 tok_t create_token(char* tok, toktype_t type) {
 	tok_t token = {
-		.tok = tok,
 		.type = type,
+		.tok = (char*)calloc(30, sizeof(char))
 	};
+
+	const char* eol = "\0";
+	strcat(token.tok, tok);
+	strcat(token.tok, eol);
 
 	return token;
 }
