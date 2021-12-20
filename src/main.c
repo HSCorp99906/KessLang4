@@ -54,8 +54,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	dump_tokens(toklist);
+
+	int nodelistSize = 0;
 	
-	parse(&parser); 
+	parse(&parser, &nodelistSize); 
+
+	printf("%d\n", nodelistSize);
 
 	fclose(fp);
 	destroy_tokenlist(&toklist);

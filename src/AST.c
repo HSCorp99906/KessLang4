@@ -7,7 +7,7 @@ struct AST_NODE** get_tree() {
 }
 
 
-bool ast_init(struct AST_NODE** nodes) {
+void ast_init(struct AST_NODE** nodes) {
 	for (int i = 0; i < START_SIZE; ++i) {
 		nodes[i] = NULL;
 	}
@@ -34,7 +34,7 @@ void init_node(struct AST_NODE* node, char* key, char* value, int32_t valueINT, 
 }
 
 
-bool ast_insert(struct AST_NODE** dest, struct AST_NODE* src) {
+bool ast_insert(struct AST_NODE** dest, struct AST_NODE* src, int* s) {
 	uint32_t index = src -> checksum;
 
 	if (dest[index] != NULL) {
@@ -42,6 +42,7 @@ bool ast_insert(struct AST_NODE** dest, struct AST_NODE* src) {
 	}
 
 	dest[index] = src;
+	*s += 1;
 	return true;
 }
 
@@ -57,7 +58,11 @@ struct AST_NODE* ast_locate(struct AST_NODE** node, char key[]) {
 }
 
 
-void ast_destroy(struct AST_NODE*** nodes) {
+void ast_destroy(struct AST_NODE*** nodes, int s) {
+	for (int i = 0; i < s; ++i) {
+		free(*nodes[i]);
+	}
+
 	free(*nodes);
 	*nodes = NULL;
 }

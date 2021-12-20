@@ -17,7 +17,7 @@ struct Parser {
 
 
 
-struct AST_NODE** parse(struct Parser*);
+struct AST_NODE** parse(struct Parser*, int* s);
 
 struct Token parse_peek(struct Parser p, unsigned int offset, toklist_t toklist);
 
