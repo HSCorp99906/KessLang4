@@ -1,0 +1,11 @@
+functions:
+	f(args)  // func_call
+
+	void func() {  // Void function creation. function that returns void.
+	}
+
+print_statement:
+	print "string"
+	print 1  // Integer literal
+	print 2.2  // Float
+	print abc  // Var
