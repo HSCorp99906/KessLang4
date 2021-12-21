@@ -6,6 +6,8 @@
 #include "Token.h"
 #include "AST.h"
 
+#define MAX_BUFFER_SIZE 120
+
 
 struct Parser {
 	toklist_t tokenList;
@@ -17,7 +19,7 @@ struct Parser {
 
 
 
-struct AST_NODE** parse(struct Parser*, int* s);
+struct AST_NODE** parseAndRun(struct Parser* parser, int* s);
 
 struct Token parse_peek(struct Parser p, unsigned int offset);
 

@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "Token.h"
+#include <stdlib.h>
 
 
 struct Lexer {

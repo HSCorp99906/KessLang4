@@ -8,6 +8,8 @@
 #include "../include/TokenDump.h"
 #include "../include/Parser.h"
 
+#define DEBUG
+
 
 int main(int argc, char* argv[]) {
 	if (argc < 2) {
@@ -53,13 +55,19 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
+
+	#ifdef DEBUG
 	dump_tokens(toklist);
+	#endif
 
 	int nodelistSize = 0;
 	
-	parse(&parser, &nodelistSize); 
+	printf("\n");
+	parseAndRun(&parser, &nodelistSize); 
 
+	#ifdef DEBUG
 	printf("%d\n", nodelistSize);
+	#endif
 
 	fclose(fp);
 	destroy_tokenlist(&toklist);

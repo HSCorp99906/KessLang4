@@ -56,28 +56,48 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 
 			if (lineBuf[strlen(lineBuf) - 2] == '"') {
 				sq_reached = true;
-				lineBuf[strlen(lineBuf) - 2] = '\0';
-				lineBuf[0] = 8;
 			}
 
-			bool ext = false;
+			printf("%s\n", lineBuf);
 
-			char finalLine[strlen(lineBuf)];
-			strcpy(finalLine, lineBuf);
-			free(lineBuf);
+			/*
+			bool ignore_quote = true;
 
-			finalLine[strlen(finalLine)] = '\0';
+			while (true) {
+				if (ignore_quote) {
+					printf("%s\n", line);
+				}
 
-			char* liney = finalLine;
+				if (strchr(part, '"') != NULL && !(ignore_quote)) {
+					add_element(toklist, create_token(part, T_STR, false));
+					sq_reached = true;
+					break;
+				} else if (ignore_quote) {
+					strtok(NULL, " ");
+					ignore_quote = false;
+				} else {
+					part = strtok(NULL, " ");
+				}
+			}
+			*/
 
-			add_element(toklist, create_token(liney, T_STR, false));
+			/*
+			for (int i = lexer -> colNum + 1; i < strlen(line); ++i) {
+				if (line[i] == '"') {
+					add_element(toklist, create_token(part, T_STR, false));
+					sq_reached = true;
+					break;
+				}
+			}
+			*/
 
 			if (!(sq_reached)) {
 				printf("MissingEndOfStringError: Missing end quote.\n");
 				lexer -> error = true;
+				break;
 			}
 		}
-		
+	
 		lexer -> colNum += strlen(part) + 1;
 		part = strtok(NULL, " ");
 	}
