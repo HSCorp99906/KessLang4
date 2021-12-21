@@ -8,8 +8,12 @@ struct AST_NODE** get_tree() {
 
 
 void ast_init(struct AST_NODE** nodes) {
+	struct AST_NODE* curNode;
+	struct AST_NODE* tmpNode;
+
 	for (int i = 0; i < START_SIZE; ++i) {
 		nodes[i] = NULL;
+		curNode = nodes[i];
 	}
 }
 

@@ -8,8 +8,6 @@
 #include "../include/TokenDump.h"
 #include "../include/Parser.h"
 
-#define DEBUG
-
 
 int main(int argc, char* argv[]) {
 	if (argc < 2) {

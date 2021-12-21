@@ -8,7 +8,7 @@
 
 
 #define START_SIZE 10
-
+#define MAX_CHILD_DEPTH 1
 
 struct AST_NODE {
 	char* key;
