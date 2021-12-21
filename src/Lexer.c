@@ -7,7 +7,7 @@ char* peek(struct Lexer* lexer, int offset, char* line) {
 
 	peekedChar = strtok(line, " ");
 
-	for (int col = 0; col < lexer -> colNum + offset; ++col) {
+	for (int col = 0; col < lexer->colNum + offset; ++col) {
 		peekedChar = strtok(NULL, " ");
 	}
 
@@ -16,8 +16,8 @@ char* peek(struct Lexer* lexer, int offset, char* line) {
 
 
 void advance(struct Lexer* lexer, char* line) {
-	++lexer -> colNum;
-	lexer -> curChar = line[lexer -> colNum];
+	++lexer->colNum;
+	lexer->curChar = line[lexer->colNum];
 }
 
 
@@ -30,8 +30,8 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 	linecpy[strlen(linecpy) - 6] = ' ';  // Removes newline.
 
 	char* part = strtok(linecpy, " ");
-	lexer -> curPart = part;
-	lexer -> curChar = line[0];
+	lexer->curPart = part;
+	lexer->curChar = line[0];
 	
 	bool submitPrint = false;
 
@@ -50,7 +50,7 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 
 			unsigned int lbidx = 0;
 
-			for (int i = lexer -> colNum; i < strlen(line); ++i) {
+			for (int i = lexer->colNum; i < strlen(line); ++i) {
 				// printf("%c", line[i]);
 				lineBuf[lbidx] = line[i];
 				++lbidx;
@@ -68,7 +68,7 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 
 			if (!(sq_reached)) {
 				printf("MissingEndOfStringError: Missing end quote.\n");
-				lexer -> error = true;
+				lexer->error = true;
 				break;
 			}
 			
@@ -78,7 +78,7 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 			}
 		}
 	
-		lexer -> colNum += strlen(part) + 1;
+		lexer->colNum += strlen(part) + 1;
 		part = strtok(NULL, " ");
 	}
 }

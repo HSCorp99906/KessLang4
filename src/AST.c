@@ -26,16 +26,16 @@ uint32_t ast_hash(char* key) {
 
 
 void init_node(struct AST_NODE* node, char* key, char* value, int32_t valueINT, bool uvi) {
-	node -> key = key;
-	node -> value = value;
-	node -> valueINT = valueINT;
-	node -> usingValueINT = uvi;
-	node -> checksum = ast_hash(key);
+	node->key = key;
+	node->value = value;
+	node->valueINT = valueINT;
+	node->usingValueINT = uvi;
+	node->checksum = ast_hash(key);
 }
 
 
 bool ast_insert(struct AST_NODE** dest, struct AST_NODE* src, int* s) {
-	uint32_t index = src -> checksum;
+	uint32_t index = src->checksum;
 
 	if (dest[index] != NULL) {
 		return false;
@@ -49,7 +49,7 @@ bool ast_insert(struct AST_NODE** dest, struct AST_NODE* src, int* s) {
 
 struct AST_NODE* ast_locate(struct AST_NODE** node, char key[]) {
 	if (node[ast_hash(key)] != NULL) {
-		if (node[ast_hash(key)] -> checksum == ast_hash(key)) {
+		if (node[ast_hash(key)]->checksum == ast_hash(key)) {
 			return node[ast_hash(key)];
 		}
 

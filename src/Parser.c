@@ -10,18 +10,18 @@ struct AST_NODE** parseAndRun(struct Parser* parser, int* s) {
 	static int i = 0;
 	static bool resetI = false;
 
-	for (i = 0; i < parser -> tokenList.size; ++i) {
-		switch (parser -> tokenList.tokens[i].type) {
+	for (i = 0; i < parser->tokenList.size; ++i) {
+		switch (parser->tokenList.tokens[i].type) {
 			case T_PRINT:
 				if (!(ignore)) {
 					node = (struct AST_NODE*)malloc(sizeof(struct AST_NODE));
 					init_node(node, "type", "print-expression", 0, false);
 					ast_insert(head_node, node, s);
 
-					node -> children = (struct AST_NODE*)calloc(1, sizeof(struct AST_NODE));
+					node->children = (struct AST_NODE*)calloc(1, sizeof(struct AST_NODE));
 				
-					init_node(node -> children, "argument", parse_peek(*parser, 2).tok, 0, false);
-					printf("%s\n", node -> children -> value);
+					init_node(node->children, "argument", parse_peek(*parser, 2).tok, 0, false);
+					printf("%s\n", node->children -> value);
 					
 				} else {
 					ignore = false;
@@ -29,7 +29,7 @@ struct AST_NODE** parseAndRun(struct Parser* parser, int* s) {
 		}
 	}
 
-	free(node -> children);
+	free(node->children);
 	ast_destroy(&head_node, *s);
 }
 
