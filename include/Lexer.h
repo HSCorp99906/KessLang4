@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include "Token.h"
 #include <stdlib.h>
-
+#include <ctype.h>
 
 struct Lexer {
 	uint32_t lineNum;

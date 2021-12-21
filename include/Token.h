@@ -14,6 +14,8 @@ typedef enum TokenType {
 	T_FLOAT,
 	T_STR,
 	T_QUOTE,
+	T_END_STATEMENT,
+	T_UNKNOWN,
 } toktype_t;
 
 typedef struct Token {

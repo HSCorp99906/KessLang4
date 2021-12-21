@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 
 	init_tokenlist(&toklist);
 
-	while (getline(&lineBuf, &lineBufSize, fp) != -1) {
+	while (getline(&lineBuf, &lineBufSize, fp) != -1 && !(lexer.error)) {
 		tokenize(&toklist, &lexer, lineBuf);
 		++lexer.lineNum;
 	}
