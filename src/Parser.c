@@ -1,33 +1,5 @@
 #include "../include/Parser.h"
 
-void pushNode(struct AST_Collection* col, struct AST_NODE* node) {
-	static bool started = true;
-	col->pos = 1;
-
-	if (started) {
-		started = false;
-		col->nodes = (struct AST_NODE**)malloc(sizeof(struct AST_NODE*) * 10);
-		col->size = 10;
-	} else if (col->pos >= col->size - 3) {
-		col->size += 5;
-		col->nodes = (struct AST_NODE**)realloc(col->nodes, sizeof(struct AST_NODE*) * col->size);
-	}
-
-	
-	col->nodes[col->pos - 1] = node;
-	++col->pos;
-
-}
-
-
-void destroy_ast_collection(struct AST_Collection* col) {
-	for (int i = 0; i < col->pos; ++i) {
-		free(col->nodes[i]);
-	}
-
-	free(col->nodes);
-	col->nodes = NULL;
-}
 
 struct AST_NODE** parseAndRun(struct Parser* parser, int* s) {
 	struct AST_NODE** head_node = get_tree();
@@ -36,7 +8,7 @@ struct AST_NODE** parseAndRun(struct Parser* parser, int* s) {
 	bool ignore = true;  // Ignores print statements on first run.
 
 	static int i = 0;
-	static bool resetI = false;
+	static bool resetI = false;  // Will be used later to reset index.
 
 	for (i = 0; i < parser->tokenList.size; ++i) {
 		switch (parser->tokenList.tokens[i].type) {
