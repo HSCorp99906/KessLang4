@@ -16,7 +16,7 @@ struct AST_NODE {
 	int32_t valueINT;
 	uint32_t checksum;
 	bool usingValueINT;
-	struct AST_NODE* children;
+	struct AST_NODE* child;
 };
 
 

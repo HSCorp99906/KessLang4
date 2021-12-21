@@ -19,8 +19,8 @@ struct AST_NODE** parseAndRun(struct Parser* parser, int* s) {
 					ast_insert(head_node, node, s);
 
 
-					node->children = (struct AST_NODE*)calloc(1, sizeof(struct AST_NODE));
-					init_node(node->children, "argument", parse_peek(*parser, 2).tok, 0, false);
+					node->child = (struct AST_NODE*)calloc(1, sizeof(struct AST_NODE));
+					init_node(node->child, "argument", parse_peek(*parser, 2).tok, 0, false);
 				} else {
 					ignore = false;
 				}
@@ -29,10 +29,10 @@ struct AST_NODE** parseAndRun(struct Parser* parser, int* s) {
 
 	if (strcmp(ast_locate(head_node, "type")->value, "print-expression") == 0) {
 		struct AST_NODE* printNode = ast_locate(head_node, "type");
-		printf("%s\n", printNode->children->value);
+		printf("%s\n", printNode->child->value);
 	}
 
-	free(node->children);
+	free(node->child);
 	ast_destroy(&head_node, *s);
 }
 
