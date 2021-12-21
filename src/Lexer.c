@@ -36,6 +36,17 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 	bool submitPrint = false;
 
 	while (part != NULL) {
+		bool digitFound = false;
+		bool quoteFound = false;
+
+		for (int i = 0; i < strlen(line); ++i) {
+			switch (line[i]) {
+				case '"':
+					quoteFound = true;
+					break;
+			}
+		}
+
 		if (strcmp(part, "print") == 0) {
 			add_element(toklist, create_token(part, T_PRINT, false));
 		} else if (strcmp(part, "let") == 0) {
@@ -75,6 +86,23 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 			if (!(submitPrint)) {
 				submitPrint = true;
 				add_element(toklist, create_token(finalLine, T_STR, false));
+			}
+		}
+
+		for (int i = 0; i < strlen(part); ++i) {
+			switch (part[i]) {
+				case '0':
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+					add_element(toklist, create_token(&part[i], T_INT, true));
+					break;
 			}
 		}
 	

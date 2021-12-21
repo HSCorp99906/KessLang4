@@ -21,10 +21,10 @@ void add_element(toklist_t* tl, tok_t element) {
 }
 
 
-tok_t create_token(char* tok, toktype_t type, bool nospace) {
+tok_t create_token(char* tok, toktype_t type, bool isint) {
 	tok_t token = {
 		.type = type,
-		.nospace = nospace,
+		.isint = isint,
 		.tok = (char*)calloc(30, sizeof(char))
 	};
 

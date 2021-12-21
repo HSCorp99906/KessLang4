@@ -21,7 +21,7 @@ typedef enum TokenType {
 typedef struct Token {
 	char* tok;
 	toktype_t type;
-	bool nospace;
+	bool isint;
 } tok_t;
 
 
@@ -34,6 +34,6 @@ typedef struct Tokenlist {
 void init_tokenlist(toklist_t* tl);
 void destroy_tokenlist(toklist_t* tl);
 void add_element(toklist_t* tl, tok_t element);
-tok_t create_token(char* tok, toktype_t type, bool nospace);
+tok_t create_token(char* tok, toktype_t type, bool isint);
 
 #endif

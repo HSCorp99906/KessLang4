@@ -27,9 +27,17 @@ struct AST_NODE** parseAndRun(struct Parser* parser, int* s) {
 		}
 	}
 
-	if (strcmp(ast_locate(head_node, "type")->value, "print-expression") == 0) {
-		struct AST_NODE* printNode = ast_locate(head_node, "type");
-		printf("%s\n", printNode->child->value);
+	if (!(parse_peek(*parser, 1).isint)) {
+		if (strcmp(ast_locate(head_node, "type")->value, "print-expression") == 0) {
+			struct AST_NODE* printNode = ast_locate(head_node, "type");
+			printf("%s\n", printNode->child->value);
+		}
+	} else {
+		/* 
+		 * TODO: Rename this function to "parse" and 
+		 * move all execution outside of this function.
+		 */
+		printf("%d\n", atoi(parse_peek(*parser, 1).tok));
 	}
 
 	free(node->child);
