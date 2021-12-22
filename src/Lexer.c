@@ -77,10 +77,10 @@ void tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 
 		} else if (strcmp(part, "let") == 0) {
 			add_element(toklist, create_token(part, T_VAR_DEC, false));
-		} else if (strchr(part, '"') != NULL) {
+		} else if (strchr(part, '"') != NULL || strchr(part, '\'') != NULL) {
 			bool sq_reached = false;
 
-			add_element(toklist, create_token("\"", T_QUOTE, false));
+			add_element(toklist, create_token("(\")|(')", T_QUOTE, false));
             
 			size_t lineBufSize = 30;
 			char* lineBuf = (char*)calloc(lineBufSize, sizeof(char));
