@@ -18,11 +18,8 @@ struct Lexer {
 };
 
 
-toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line);
-
+void tokenize(toklist_t* toklist, struct Lexer* lexer, char* line);
 char* peek(struct Lexer* lexer, int offset, char* line);
-
-
 void advance(struct Lexer* lexer, char* line);
 
 #endif

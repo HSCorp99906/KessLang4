@@ -45,6 +45,6 @@ struct AST_NODE** parseAndRun(struct Parser* parser, int* s) {
 }
 
 
-struct Token parse_peek(struct Parser p, unsigned int offset) {
-	return p.tokenList.tokens[p.index + offset];
+struct Token parse_peek(struct Parser p, unsigned int index) {
+	return p.tokenList.tokens[index];
 }

@@ -21,7 +21,7 @@ void advance(struct Lexer* lexer, char* line) {
 }
 
 
-toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
+void tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 	char linecpy[strlen(line)]; // Creates a copy of the line.
 
 	strcpy(linecpy, line);
@@ -36,19 +36,45 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 	bool submitPrint = false;
 
 	while (part != NULL) {
-		bool digitFound = false;
-		bool quoteFound = false;
-
-		for (int i = 0; i < strlen(line); ++i) {
-			switch (line[i]) {
-				case '"':
-					quoteFound = true;
-					break;
-			}
-		}
-
 		if (strcmp(part, "print") == 0) {
-			add_element(toklist, create_token(part, T_PRINT, false));
+			add_element(toklist, create_token(part, T_PRINT, false));	
+			unsigned short quoteCount = 0;
+			bool integer = false;
+
+			for (int i = 6; i < strlen(line); ++i) {
+				if (line[i] == '"') {
+					++quoteCount;
+					if (quoteCount == 2) {
+						break;
+					}
+				}
+
+				switch (line[i]) {
+					case '0':
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+					case '8':
+					case '9':
+						integer = true;
+						break;
+					default:
+						integer = false;
+				}
+				
+			}
+
+			if (!(integer) && quoteCount < 2) {
+				printf("MissingQuoteError: Missing quote(s).\nLine %d\n", lexer->lineNum);
+				lexer->error = true;
+				break;
+			} 
+
+
 		} else if (strcmp(part, "let") == 0) {
 			add_element(toklist, create_token(part, T_VAR_DEC, false));
 		} else if (strchr(part, '"') != NULL) {
@@ -67,21 +93,13 @@ toklist_t tokenize(toklist_t* toklist, struct Lexer* lexer, char* line) {
 				++lbidx;
 			}
 
-			if (lineBuf[strlen(lineBuf) - 2] == '"' || lineBuf[strlen(lineBuf) - 2] == ';') {
-				sq_reached = true;
-				lineBuf[0] = 8;
-				lineBuf[strlen(lineBuf) - 3] = '\0';
-			}
+
+			lineBuf[0] = 8;  // Removes first quote.
+			lineBuf[strlen(lineBuf) - 3] = '\0';   // Removes second quote.
 
 			char finalLine[strlen(lineBuf)];
 			strcpy(finalLine, lineBuf);
 			free(lineBuf);
-
-			if (!(sq_reached)) {
-				printf("MissingEndOfStringError: Missing end quote.\n");
-				lexer->error = true;
-				break;
-			}
 			
 			if (!(submitPrint)) {
 				submitPrint = true;

@@ -17,6 +17,7 @@ void destroy_tokenlist(toklist_t* tl) {
 void add_element(toklist_t* tl, tok_t element) {
 	tl->tokens[tl->size - 1] = element;
 	++tl->size;
+	++tl->elements;
 	tl->tokens = (struct Token*)realloc(tl->tokens, sizeof(struct Token) * tl->size);
 }
 

@@ -13,10 +13,9 @@
 
 struct Parser {
 	toklist_t tokenList;
-	tok_t current_token;
+	tok_t currentToken;
 	unsigned int colNum;
 	uint32_t lineNum;
-	uint64_t index;
 };
 
 

@@ -27,7 +27,6 @@ int main(int argc, char* argv[]) {
 
 	struct Lexer lexer = {
 		.lineNum = 1,
-		.colNum = 0,
 		.error = false,
 	};
 
@@ -44,7 +43,6 @@ int main(int argc, char* argv[]) {
 		.tokenList = toklist,
 		.colNum = 0,
 		.lineNum = 1,
-		.index = 0,
 	};
 
 	if (lexer.error) {

@@ -28,6 +28,7 @@ typedef struct Token {
 typedef struct Tokenlist {
 	struct Token* tokens;
 	size_t size;
+	size_t elements;
 } toklist_t;
 
 
